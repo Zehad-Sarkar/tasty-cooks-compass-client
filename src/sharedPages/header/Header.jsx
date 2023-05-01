@@ -5,17 +5,17 @@ import { NavLink } from "react-router-dom";
 const Header = () => {
   const [user,setUser]=useState(null)
   return (
-    <div className="flex items-center justify-around m-4">
-      <div className="text-4xl font-bold">
+    <div className="items-center justify-around m-4 md:flex">
+      <div className="text-2xl font-bold md:text-4xl">
         <h1 className="text-purple-600">
-          Tasty{" "}
-          <span className="text-5xl text-purple-400 font-extra-bold">
+          Tasty
+          <span className="text-3xl text-purple-400 md:text-5xl font-extra-bold">
             Cookes
-          </span>{" "}
+          </span>
           Compass
         </h1>
       </div>
-      <div className="flex gap-8 font-semibold">
+      <div className="flex gap-8 mt-2 font-semibold">
         <NavLink
           to="/"
           className={({ isActive }) => (isActive ? "active" : "")}
