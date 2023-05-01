@@ -1,8 +1,10 @@
 import { Button } from "flowbite-react";
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 
 const Register = () => {
+const [error,setError]=useState('')
+  
   const handleRegister = (event) => {
     event.preventDefault();
     const form = event.target;
