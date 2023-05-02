@@ -4,33 +4,37 @@ import Home from "../sharedPages/Home/Home";
 import Blog from "../sharedPages/blogs/Blog";
 import Login from "../sharedPages/login/Login";
 import Register from "../sharedPages/register/Register";
-import ErrorPages from "../errorPages/ErrorPages";
+import ChefRecipes from "../sharedPages/chefRecipes/ChefRecipes";
+// import ErrorPages from "../errorPages/ErrorPages";
 
 const router = createBrowserRouter([
   {
-    path: '/',
+    path: "/",
     element: <Main></Main>,
     // errorElement:<ErrorPages></ErrorPages>,
     children: [
       {
-        path: '/',
-        element:<Home></Home>
+        path: "/",
+        element: <Home></Home>,
       },
       {
-        path: '/blog',
-        element:<Blog></Blog>
+        path: "/blog",
+        element: <Blog></Blog>,
       },
       {
-       path: '/login',
-        element:<Login></Login>
-      },  
+        path: "/login",
+        element: <Login></Login>,
+      },
       {
-       path: '/register',
-        element:<Register></Register>
-      },  
-      
-    ]
+        path: "/register",
+        element: <Register></Register>,
+      },
+    ],
+  },
+  {
+    path: '/chefrecipes',
+    element:<ChefRecipes></ChefRecipes>
   }
-])
+]);
 
 export default router;
