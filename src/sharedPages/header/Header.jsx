@@ -1,11 +1,12 @@
 import { Button } from "flowbite-react";
 import React, { useContext, useState } from "react";
-import { NavLink } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import { AuthContext } from "../../provider/AuthProvider";
 
 const Header = () => {
   const { user, userLogout } = useContext(AuthContext);
   const [error, setErrorr] = useState("");
+  // console.log(user);
 
   // logout handler
   const handleLogout = () => {
@@ -40,20 +41,24 @@ const Header = () => {
         >
           Blog
         </NavLink>
-        <NavLink
-          to="/login"
-          className={({ isActive }) => (isActive ? "active" : "")}
-        >
+
+        <p>{user ? <span onClick={handleLogout}>logout</span> : ""}</p>
+        <div>
           {user ? (
             <>
-              profile <span onClick={handleLogout}>logout</span>
+              <img
+                className="w-8 h-8 rounded-full"
+                src={user?.photoURL}
+                alt="user photo"
+                title={user?.displayName}
+              />
             </>
           ) : (
-            <Button to="/login" className="btn">
-              Login
-            </Button>
+            <Link to="/login">
+              <Button className="btn">Login</Button>
+            </Link>
           )}
-        </NavLink>
+        </div>
       </div>
     </div>
   );

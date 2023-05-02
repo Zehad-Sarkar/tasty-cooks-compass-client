@@ -1,6 +1,6 @@
 import { Button } from "flowbite-react";
 import React, { useContext, useRef, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { FaGoogle, FaGithub } from "react-icons/fa";
 import { AuthContext } from "../../provider/AuthProvider";
 
@@ -8,7 +8,9 @@ const Login = () => {
   const [error, setError] = useState("");
   const [ggleUser, setGgleUser] = useState("");
   const [loginUser, setLoginUser] = useState(null);
-  const { googleSignIn, userSignIn } = useContext(AuthContext);
+  const { googleSignIn, userSignIn, githubSignIn } = useContext(AuthContext);
+
+  const navigate=useNavigate()
   const emailRef = useRef();
 
   const handleLogin = (event) => {
@@ -21,6 +23,7 @@ const Login = () => {
       .then((result) => {
         const loginUser = result.user;
         setLoginUser(loginUser);
+        navigate('/')
       })
       .catch((error) => {
         setError(error.message);
@@ -28,19 +31,34 @@ const Login = () => {
   };
 
   // google sign in handler
-  const handleGoogleSignIn = (event) => {
+  const handleGoogleSignIn = () => {
     // console.log("google");
     googleSignIn()
       .then((result) => {
         const googleUser = result.user;
         // console.log("Google Sign in Successfull");
         setGgleUser("Google Sign in Successfull");
+         navigate("/");
       })
       .catch((error) => {
-         console.log(error.message);
-        // setError(error.message);
+        // console.log(error.message);
+        setError(error.message);
       });
   };
+
+  //github sign in handler
+  const handleGithubSignIn = () => {
+    githubSignIn()
+      .then((result) => {
+        const githubUser = result.user;
+        setGgleUser("Github Sign in Successfull");
+         navigate("/");
+      })
+      .catch((error) => {
+        setError(error.message);
+      });
+  };
+
   // reset password event handler
   const handleResetPassword = (event) => {
     console.log(emailRef.current.value);
@@ -110,6 +128,7 @@ const Login = () => {
               <FaGoogle className="mr-2"></FaGoogle> Sign in with Google
             </button>
             <button
+              onClick={handleGithubSignIn}
               type="button"
               className="text-white w-full bg-[#24292F] hover:bg-[#24292F]/90 focus:ring-4 focus:outline-none focus:ring-[#24292F]/50 font-medium rounded-lg text-md px-5 py-2.5 text-center inline-flex items-center dark:focus:ring-gray-500 dark:hover:bg-[#050708]/30 mr-2 mb-2"
             >
