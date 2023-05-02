@@ -1,10 +1,11 @@
 import { Button } from "flowbite-react";
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import "../../../src/index.css";
 
 const Register = () => {
-const [error,setError]=useState('')
-  
+  const [error, setError] = useState("");
+
   const handleRegister = (event) => {
     event.preventDefault();
     const form = event.target;
@@ -17,9 +18,11 @@ const [error,setError]=useState('')
 
   return (
     <div className="m-4">
-      <h1>Please Register</h1>
+      <h1 className="p-1 mx-auto mb-2 text-4xl font-extrabold text-purple-500 w-80">
+        Please Register
+      </h1>
       <form onSubmit={handleRegister}>
-        <div className="p-4 mx-auto border-2 w-72">
+        <div className="p-4 mx-auto border-2 border-blue-300 rounded w-80">
           <div className="">
             <label
               htmlFor="name"
@@ -83,7 +86,7 @@ const [error,setError]=useState('')
               required
             ></input>
           </div>
-          <Button type="submit" className="mt-2">
+          <Button type="submit" className="mt-2 btn">
             Register
           </Button>
           <p className="mt-2">

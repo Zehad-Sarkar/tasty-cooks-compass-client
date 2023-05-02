@@ -32,7 +32,7 @@ const Header = () => {
           to="/login"
           className={({ isActive }) => (isActive ? "active" : "")}
         >
-          {user ? <>profile</> : <Button to='/login'> Login</Button>}
+          {user ? <>profile</> : <Button to='/login' className="btn">Login</Button>}
         </NavLink>
       </div>
     </div>

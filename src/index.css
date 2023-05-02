@@ -1,3 +1,23 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+
+
+.btn {
+  @apply px-4 font-bold text-white rounded-lg;
+  background-color: #1750c2;
+}
+
+.btn:hover {
+  background-color: #9424d1;
+}
+
+.btn:focus {
+  outline: none;
+  box-shadow: 0 0 0 2px #83a2df;
+}
+
+.btn-link{
+  @apply text-blue-600 text-lg
+}
