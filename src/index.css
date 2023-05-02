@@ -21,3 +21,11 @@
 .btn-link{
   @apply text-blue-600 text-lg
 }
+
+.err-msg{
+  @apply text-red-500 text-lg
+}
+
+.success-msg{
+  @apply text-green-600 text-lg
+}

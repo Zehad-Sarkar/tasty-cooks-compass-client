@@ -1,11 +1,15 @@
 import { Button } from "flowbite-react";
-import React, { useRef, useState } from "react";
+import React, { useContext, useRef, useState } from "react";
 import { Link } from "react-router-dom";
-import { FaGoogle ,FaGithub} from "react-icons/fa";
+import { FaGoogle, FaGithub } from "react-icons/fa";
+import { AuthContext } from "../../provider/AuthProvider";
 
 const Login = () => {
   const [error, setError] = useState("");
-  const emailRef=useRef()
+  const [ggleUser, setGgleUser] = useState("");
+  const [loginUser, setLoginUser] = useState(null);
+  const { googleSignIn, userSignIn } = useContext(AuthContext);
+  const emailRef = useRef();
 
   const handleLogin = (event) => {
     event.preventDefault();
@@ -13,12 +17,35 @@ const Login = () => {
     const email = form.email.value;
     const password = form.password.value;
     console.log(email, password);
+    userSignIn(email, password)
+      .then((result) => {
+        const loginUser = result.user;
+        setLoginUser(loginUser);
+      })
+      .catch((error) => {
+        setError(error.message);
+      });
   };
-  
+
+  // google sign in handler
+  const handleGoogleSignIn = (event) => {
+    // console.log("google");
+    googleSignIn()
+      .then((result) => {
+        const googleUser = result.user;
+        // console.log("Google Sign in Successfull");
+        setGgleUser("Google Sign in Successfull");
+      })
+      .catch((error) => {
+         console.log(error.message);
+        // setError(error.message);
+      });
+  };
   // reset password event handler
-  const handleResetPassword = event => {
+  const handleResetPassword = (event) => {
     console.log(emailRef.current.value);
-  }
+  };
+
   return (
     <div>
       <h1 className="p-1 mx-auto mb-2 text-4xl font-extrabold text-purple-500 w-80">
@@ -59,7 +86,10 @@ const Login = () => {
               required
             ></input>
             <p>
-              Forgot your <button onClick={handleResetPassword} className="btn-link">password ?</button>
+              Forgot your{" "}
+              <button onClick={handleResetPassword} className="btn-link">
+                password ?
+              </button>
             </p>
           </div>
           <Button type="submit" className="mt-2 btn">
@@ -73,6 +103,7 @@ const Login = () => {
           </p>
           <div className="mt-4">
             <button
+              onClick={handleGoogleSignIn}
               type="button"
               className="text-white w-full bg-[#4285F4] hover:bg-[#4285F4]/90 focus:ring-4 focus:outline-none focus:ring-[#4285F4]/50 font-medium rounded-lg text-md px-5 py-2.5 text-center inline-flex items-center dark:focus:ring-[#4285F4]/55 mr-2 mb-2"
             >
@@ -85,6 +116,7 @@ const Login = () => {
               <FaGithub className="mr-2"></FaGithub> Sign in with Github
             </button>
           </div>
+          <p className="text-red-500">{error}</p>
         </div>
       </form>
     </div>

@@ -1,10 +1,14 @@
 import { Button } from "flowbite-react";
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { Link } from "react-router-dom";
 import "../../../src/index.css";
+import { AuthContext } from "../../provider/AuthProvider";
 
 const Register = () => {
   const [error, setError] = useState("");
+  const [regUser, setRegUser] = useState("");
+
+  const { createUser } = useContext(AuthContext);
 
   const handleRegister = (event) => {
     event.preventDefault();
@@ -14,6 +18,14 @@ const Register = () => {
     const email = form.email.value;
     const password = form.password.value;
     console.log(name, photoUrl, email, password);
+    createUser(email, password)
+      .then((result) => {
+        const registerUser = result.user;
+        setRegUser("User Registration Successfull");
+      })
+      .catch((error) => {
+        setError(error.message);
+      });
   };
 
   return (
@@ -95,6 +107,7 @@ const Register = () => {
               Login
             </Link>
           </p>
+          <p className="text-green-600">{regUser}</p>
         </div>
       </form>
     </div>

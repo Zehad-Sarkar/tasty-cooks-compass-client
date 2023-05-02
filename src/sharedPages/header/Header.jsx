@@ -1,9 +1,21 @@
 import { Button } from "flowbite-react";
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { NavLink } from "react-router-dom";
+import { AuthContext } from "../../provider/AuthProvider";
 
 const Header = () => {
-  const [user,setUser]=useState(null)
+  const { user, userLogout } = useContext(AuthContext);
+  const [error, setErrorr] = useState("");
+
+  // logout handler
+  const handleLogout = () => {
+    userLogout()
+      .then(() => {})
+      .catch((error) => {
+        setErrorr(error.message);
+      });
+  };
+
   return (
     <div className="items-center justify-around m-4 md:flex">
       <div className="text-2xl font-bold md:text-4xl">
@@ -32,7 +44,15 @@ const Header = () => {
           to="/login"
           className={({ isActive }) => (isActive ? "active" : "")}
         >
-          {user ? <>profile</> : <Button to='/login' className="btn">Login</Button>}
+          {user ? (
+            <>
+              profile <span onClick={handleLogout}>logout</span>
+            </>
+          ) : (
+            <Button to="/login" className="btn">
+              Login
+            </Button>
+          )}
         </NavLink>
       </div>
     </div>
