@@ -50,7 +50,7 @@ const Header = () => {
                 className="w-8 h-8 rounded-full"
                 src={user?.photoURL}
                 alt="user photo"
-                title={user?.displayName}
+                title={user?.displayName? user.displayName:"userName unavailable"}
               />
             </>
           ) : (
