@@ -1,29 +1,10 @@
-import Slider from "../slider/Slider";
-import { Outlet } from "react-router-dom";
-import Card from "../card/Card";
-import { AuthContext } from "../../provider/AuthProvider";
-import { useContext, useEffect, useState } from "react";
-import Swiper, { Navigation } from "swiper";
-import { SwiperSlide } from "swiper/react";
+import React, { useContext } from "react";
+import { AuthContext } from "../provider/AuthProvider";
+import { Navigate, useLocation } from "react-router-dom";
 
-const Home = () => {
-  const [data, setData] = useState([]);
-  const { loading } = useContext(AuthContext);
-  const [chefsdata, setchefsdata] = useState([]);
-  useEffect(() => {
-    const loadAllData = async () => {
-      try {
-        const jsonData =
-          "https://tasty-cookes-compass-server-zehad-sarkar.vercel.app/chefrecipes/";
-        const res = await fetch(jsonData);
-        const data = await res.json();
-        setData(data);
-      } catch (error) {
-        console.log(error);
-      }
-    };
-    loadAllData();
-  }, []);
+const ProtectPage = ({ children }) => {
+  const location = useLocation();
+  const { user, loading } = useContext(AuthContext);
 
   if (loading) {
     return (
@@ -51,23 +32,11 @@ const Home = () => {
     );
   }
 
-  return (
-    <div className="mt-4">
-      <Outlet></Outlet>
-      <Slider></Slider>
+  if (user) {
+   return children;
+  }
 
-      <section>
-        <h1 className="mx-auto text-4xl font-extrabold text-purple-400 w-80">
-          Our top Chef
-        </h1>
-        <div className="grid w-9/12 gap-4 mx-auto mt-4 lg:grid-cols-2 lg:grid">
-          {data.map((data) => (
-            <Card data={data} key={data.id}></Card>
-          ))}
-        </div>
-      </section>
-    </div>
-  );
+  return <Navigate state={{ from: location }} to="/login" replace></Navigate>;
 };
 
-export default Home;
+export default ProtectPage;

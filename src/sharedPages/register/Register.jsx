@@ -1,12 +1,16 @@
 import { Button } from "flowbite-react";
 import React, { useContext, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "../../../src/index.css";
 import { AuthContext } from "../../provider/AuthProvider";
 
 const Register = () => {
   const [error, setError] = useState("");
-  const [regUser, setRegUser] = useState("");
+  const [regSuccess, setRegSuccess] = useState("");
+  const [emailError,setEmailError]=useState('')
+
+  const [passwordError,setPasswordError]=useState('')
+  const navigate = useNavigate();
 
   const { createUser } = useContext(AuthContext);
 
@@ -17,11 +21,21 @@ const Register = () => {
     const photoUrl = form.photourl.value;
     const email = form.email.value;
     const password = form.password.value;
-    console.log(name, photoUrl, email, password);
+    if (email === "") {
+      setEmailError("must type valid email");
+      return;
+    }
+    if (password.length < 6) {
+      setPasswordError("password cannot be under 6 charecter");
+      return;
+    }
+
     createUser(email, password)
       .then((result) => {
         const registerUser = result.user;
-        setRegUser("User Registration Successfull");
+        navigate("/");
+        setRegSuccess("Registration successfull");
+        setError("");
       })
       .catch((error) => {
         setError(error.message);
@@ -81,6 +95,7 @@ const Register = () => {
               placeholder="your Email"
               required
             ></input>
+            <p className="text-red-400">{emailError}</p>
           </div>
           <div className="">
             <label
@@ -97,6 +112,8 @@ const Register = () => {
               placeholder="your password"
               required
             ></input>
+            <p className="text-yellow-600">{error}</p>
+            <p className="text-red-400">{passwordError}</p>
           </div>
           <Button type="submit" className="mt-2 btn">
             Register
@@ -107,8 +124,8 @@ const Register = () => {
               Login
             </Link>
           </p>
-          <p className="text-green-600">{regUser}</p>
         </div>
+        <p className="text-yellow-600">{regSuccess}</p>
       </form>
     </div>
   );

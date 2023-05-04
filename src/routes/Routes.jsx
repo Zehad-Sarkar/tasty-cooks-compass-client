@@ -5,13 +5,14 @@ import Blog from "../sharedPages/blogs/Blog";
 import Login from "../sharedPages/login/Login";
 import Register from "../sharedPages/register/Register";
 import ChefRecipes from "../sharedPages/chefRecipes/ChefRecipes";
+import ProtectPage from "../protectedPage/ProtectPage";
 // import ErrorPages from "../errorPages/ErrorPages";
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <Main></Main>,
-    // errorElement:<ErrorPages></ErrorPages>,
+    // errorElement: <ErrorPages></ErrorPages>,
     children: [
       {
         path: "/",
@@ -21,6 +22,7 @@ const router = createBrowserRouter([
         path: "/blog",
         element: <Blog></Blog>,
       },
+
       {
         path: "/login",
         element: <Login></Login>,
@@ -29,12 +31,20 @@ const router = createBrowserRouter([
         path: "/register",
         element: <Register></Register>,
       },
+      {
+        path: "/chefrecipes/:id",
+        element: (
+          <ProtectPage>
+            <ChefRecipes></ChefRecipes>
+          </ProtectPage>
+        ),
+        loader: ({ params }) =>
+          fetch(
+            `https://tasty-cookes-compass-server-zehad-sarkar.vercel.app/chefrecipes/${params.id}`
+          ),
+      },
     ],
   },
-  {
-    path: '/chefrecipes',
-    element:<ChefRecipes></ChefRecipes>
-  }
 ]);
 
 export default router;

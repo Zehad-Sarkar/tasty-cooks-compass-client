@@ -1,16 +1,19 @@
 import { Button } from "flowbite-react";
 import React, { useContext, useRef, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { FaGoogle, FaGithub } from "react-icons/fa";
 import { AuthContext } from "../../provider/AuthProvider";
+// import toast, { Toaster } from "react-hot-toast";
 
 const Login = () => {
   const [error, setError] = useState("");
-  const [ggleUser, setGgleUser] = useState("");
-  const [loginUser, setLoginUser] = useState(null);
-  const { googleSignIn, userSignIn, githubSignIn } = useContext(AuthContext);
+  const [password, setPassword] = useState("");
 
-  const navigate=useNavigate()
+  const { googleSignIn, userSignIn, githubSignIn, resetpassword } =
+    useContext(AuthContext);
+  const navigate = useNavigate();
+  const location = useLocation();
+  const from = location.state?.from?.pathname || "/";
   const emailRef = useRef();
 
   const handleLogin = (event) => {
@@ -18,12 +21,14 @@ const Login = () => {
     const form = event.target;
     const email = form.email.value;
     const password = form.password.value;
-    console.log(email, password);
+    if (password) {
+      setPassword("password should not match");
+    }
     userSignIn(email, password)
       .then((result) => {
         const loginUser = result.user;
-        setLoginUser(loginUser);
-        navigate('/')
+        navigate(from, { replace: true });
+        setError("");
       })
       .catch((error) => {
         setError(error.message);
@@ -32,16 +37,12 @@ const Login = () => {
 
   // google sign in handler
   const handleGoogleSignIn = () => {
-    // console.log("google");
     googleSignIn()
       .then((result) => {
         const googleUser = result.user;
-        // console.log("Google Sign in Successfull");
-        setGgleUser("Google Sign in Successfull");
-         navigate("/");
+        navigate(from, { replace: true });
       })
       .catch((error) => {
-        // console.log(error.message);
         setError(error.message);
       });
   };
@@ -51,8 +52,7 @@ const Login = () => {
     githubSignIn()
       .then((result) => {
         const githubUser = result.user;
-        setGgleUser("Github Sign in Successfull");
-         navigate("/");
+        navigate(from, { replace: true });
       })
       .catch((error) => {
         setError(error.message);
@@ -61,7 +61,11 @@ const Login = () => {
 
   // reset password event handler
   const handleResetPassword = (event) => {
-    console.log(emailRef.current.value);
+    resetpassword(emailRef.current.value)
+      .then(() => {})
+      .catch((error) => {
+        setError(error.message);
+      });
   };
 
   return (
@@ -103,8 +107,9 @@ const Login = () => {
               placeholder="Type your password"
               required
             ></input>
+            <p className="text-red-500">{password}</p>
             <p>
-              Forgot your{" "}
+              Forgot your
               <button onClick={handleResetPassword} className="btn-link">
                 password ?
               </button>
@@ -135,9 +140,9 @@ const Login = () => {
               <FaGithub className="mr-2"></FaGithub> Sign in with Github
             </button>
           </div>
-          <p className="text-red-500">{error}</p>
         </div>
       </form>
+      {/* <Toaster />; */}
     </div>
   );
 };
