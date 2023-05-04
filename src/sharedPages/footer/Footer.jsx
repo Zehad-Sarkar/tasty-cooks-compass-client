@@ -9,8 +9,9 @@ const Footer = () => {
             <div className="px-4 mb-4 md:w-1/4 md:mb-0">
               <h2 className="mb-4 text-lg text-white">About Us</h2>
               <p className="leading-loose text-gray-400">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer
-                efficitur est ac ipsum sagittis, quis luctus nisi euismod.
+                Thai Spice Kitchen is a restaurant that offers authentic Thai
+                cuisine. The restaurant specializes in using fresh and
+                high-quality ingredients to prepare traditional Thai dishes.
               </p>
             </div>
             <div className="px-4 mb-4 md:w-1/4 md:mb-0">

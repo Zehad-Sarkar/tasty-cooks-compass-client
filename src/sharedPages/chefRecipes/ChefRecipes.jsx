@@ -9,7 +9,7 @@ import Rating from "react-rating";
 const ChefRecipes = () => {
   const [fav, setFav] = useState(false);
   const recipies = useLoaderData();
-  console.log(recipies)
+ 
   const {
     name,
     picture,
