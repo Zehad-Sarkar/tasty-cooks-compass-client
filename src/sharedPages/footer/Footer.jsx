@@ -1,4 +1,5 @@
-import React from 'react';
+import React from "react";
+import { Link } from "react-router-dom";
 
 const Footer = () => {
   return (
@@ -7,12 +8,7 @@ const Footer = () => {
         <div className="container px-4 mx-auto">
           <div className="flex flex-wrap -mx-4">
             <div className="px-4 mb-4 md:w-1/4 md:mb-0">
-              <h2 className="mb-4 text-lg text-white">About Us</h2>
-              <p className="leading-loose text-gray-400">
-                Thai Spice Kitchen is a restaurant that offers authentic Thai
-                cuisine. The restaurant specializes in using fresh and
-                high-quality ingredients to prepare traditional Thai dishes.
-              </p>
+              <h2 className="mb-4 text-lg text-white">Tasty Cookes Compass</h2>
             </div>
             <div className="px-4 mb-4 md:w-1/4 md:mb-0">
               <h2 className="mb-4 text-lg text-white">Links</h2>
@@ -23,19 +19,22 @@ const Footer = () => {
                   </a>
                 </li>
                 <li className="mb-2">
-                  <a href="#" className="text-gray-400 hover:text-white">
-                    Recipes
-                  </a>
+                  <Link to="/about" className="text-gray-400 hover:text-white">
+                    About
+                  </Link>
                 </li>
                 <li className="mb-2">
-                  <a href="#" className="text-gray-400 hover:text-white">
+                  <Link to="/blog" className="text-gray-400 hover:text-white">
                     Blog
-                  </a>
+                  </Link>
                 </li>
                 <li className="mb-2">
-                  <a href="#" className="text-gray-400 hover:text-white">
+                  <Link
+                    to="/contact"
+                    className="text-gray-400 hover:text-white"
+                  >
                     Contact Us
-                  </a>
+                  </Link>
                 </li>
               </ul>
             </div>

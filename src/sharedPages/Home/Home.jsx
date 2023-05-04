@@ -5,6 +5,8 @@ import { AuthContext } from "../../provider/AuthProvider";
 import { useContext, useEffect, useState } from "react";
 import Swiper, { Navigation } from "swiper";
 import { SwiperSlide } from "swiper/react";
+import Categories from "../category/Categories";
+import CustomerReview from "../chefRecipes/viewrecipes/CustomerReview";
 
 const Home = () => {
   const [data, setData] = useState([]);
@@ -65,6 +67,12 @@ const Home = () => {
             <Card data={data} key={data.id}></Card>
           ))}
         </div>
+      </section>
+      {/* extra section */}
+      <section>
+        <Categories></Categories>
+
+        <CustomerReview></CustomerReview>
       </section>
     </div>
   );

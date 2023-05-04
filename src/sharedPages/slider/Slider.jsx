@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 import { Navigation } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
@@ -17,7 +17,10 @@ const Slider = () => {
               private households.
             </p>
             <p>
-              <img src="https://thumbs.dreamstime.com/b/thai-chef-cooking-fried-meat-vegetables-donburi-japanese-food-show-customer-serve-modern-restaurant-bangyai-city-184967398.jpg" />
+              <img
+                src="https://media.istockphoto.com/id/1391236717/photo/world-famous-restaurant-asian-female-chef-cooking-delicious-and-authentic-food-uses-digital.jpg?b=1&s=170667a&w=0&k=20&c=B6oVDp7V3-0rYCNUIg-VWx0N6ML9TJT2ES6JywqL46A="
+                loading="lazy"
+              />
             </p>
           </div>
         </SwiperSlide>
@@ -30,7 +33,10 @@ const Slider = () => {
               private households.
             </p>
             <p>
-              <img src="https://media.istockphoto.com/id/1391236717/photo/world-famous-restaurant-asian-female-chef-cooking-delicious-and-authentic-food-uses-digital.jpg?b=1&s=170667a&w=0&k=20&c=B6oVDp7V3-0rYCNUIg-VWx0N6ML9TJT2ES6JywqL46A=" />
+              <img
+                src="https://media.istockphoto.com/id/1391236717/photo/world-famous-restaurant-asian-female-chef-cooking-delicious-and-authentic-food-uses-digital.jpg?b=1&s=170667a&w=0&k=20&c=B6oVDp7V3-0rYCNUIg-VWx0N6ML9TJT2ES6JywqL46A="
+                loading="lazy"
+              />
             </p>
           </div>
         </SwiperSlide>
@@ -43,7 +49,10 @@ const Slider = () => {
               private households.
             </p>
             <p>
-              <img src="https://thumbs.dreamstime.com/b/thai-chef-cooking-fried-meat-vegetables-donburi-japanese-food-show-customer-serve-modern-restaurant-bangyai-city-184967398.jpg" />
+              <img
+                src="https://media.istockphoto.com/id/1391236717/photo/world-famous-restaurant-asian-female-chef-cooking-delicious-and-authentic-food-uses-digital.jpg?b=1&s=170667a&w=0&k=20&c=B6oVDp7V3-0rYCNUIg-VWx0N6ML9TJT2ES6JywqL46A="
+                loading="lazy"
+              />
             </p>
           </div>
         </SwiperSlide>
