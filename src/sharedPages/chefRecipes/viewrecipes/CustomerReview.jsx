@@ -3,7 +3,7 @@ import React from "react";
 const CustomerReview = () => {
   return (
     <div className="">
-      <h2 className="mb-4 text-3xl font-bold text-center text-purple-600">Customer Reviews</h2>
+      <h2 className="mb-4 text-3xl font-bold text-center text-purple-400">Customer Reviews</h2>
       <div className="gap-4 p-2 my- mx- auto md:flex">
         <div className="p-6 mb-4 bg-white rounded-lg shadow-md">
           <div className="flex items-center mb-4">

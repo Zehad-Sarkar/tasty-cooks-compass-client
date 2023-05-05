@@ -3,13 +3,15 @@ import React, { useContext, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import "../../../src/index.css";
 import { AuthContext } from "../../provider/AuthProvider";
+import { updateProfile } from "firebase/auth";
+import { Toaster, toast } from "react-hot-toast";
 
 const Register = () => {
   const [error, setError] = useState("");
   const [regSuccess, setRegSuccess] = useState("");
-  const [emailError,setEmailError]=useState('')
+  const [emailError, setEmailError] = useState("");
 
-  const [passwordError,setPasswordError]=useState('')
+  const [passwordError, setPasswordError] = useState("");
   const navigate = useNavigate();
 
   const { createUser } = useContext(AuthContext);
@@ -18,10 +20,10 @@ const Register = () => {
     event.preventDefault();
     const form = event.target;
     const name = form.name.value;
-    const photoUrl = form.photourl.value;
+    const photoUrl = form.photoUrl.value;
     const email = form.email.value;
     const password = form.password.value;
-    if (email === "") {
+    if (!email) {
       setEmailError("must type valid email");
       return;
     }
@@ -33,9 +35,23 @@ const Register = () => {
     createUser(email, password)
       .then((result) => {
         const registerUser = result.user;
+        console.log(registerUser);
         navigate("/");
         setRegSuccess("Registration successfull");
         setError("");
+        if (registerUser) {
+          updateProfile(registerUser, {
+            displayName: name,
+            photoURL: photoUrl,
+            // photoURL: "https://r-a-zehad-sarkar.imgbb.com/",
+          })
+            .then(() => {
+              toast.success("Successfully profile updated");
+            })
+            .catch((error) => {
+              console.error(error.message);
+            });
+        }
       })
       .catch((error) => {
         setError(error.message);
@@ -67,14 +83,14 @@ const Register = () => {
           </div>
           <div className="">
             <label
-              htmlFor="photourl"
+              htmlFor="photoUrl"
               className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
             >
               Photo Url
             </label>
             <input
-              type="text"
-              name="photourl"
+              type="URL"
+              name="photoUrl"
               id="photourl"
               className="w-60 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5  dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
               placeholder="your photo url"
@@ -127,6 +143,7 @@ const Register = () => {
         </div>
         <p className="text-yellow-600">{regSuccess}</p>
       </form>
+      <Toaster />;
     </div>
   );
 };

@@ -21,7 +21,7 @@ const Home = () => {
         const data = await res.json();
         setData(data);
       } catch (error) {
-        console.log(error);
+        console.error(error);
       }
     };
     loadAllData();

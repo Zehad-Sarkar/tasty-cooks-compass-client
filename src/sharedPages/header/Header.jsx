@@ -6,7 +6,7 @@ import { AuthContext } from "../../provider/AuthProvider";
 const Header = () => {
   const { user, userLogout } = useContext(AuthContext);
   const [error, setErrorr] = useState("");
-  // console.log(user);
+  console.log(user);
 
   // logout handler
   const handleLogout = () => {
@@ -48,9 +48,9 @@ const Header = () => {
             <>
               <img
                 className="w-8 h-8 rounded-full"
-                src={user?.photoURL}
+                src={user?.photoUrl? user.photoUrl:""}
                 alt="user photo"
-                title={user?.displayName? user.displayName:"userName unavailable"}
+                title={user?.displayName? user.displayName:""}
               />
             </>
           ) : (
