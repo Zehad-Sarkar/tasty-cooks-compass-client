@@ -1,11 +1,10 @@
 import { Button } from "flowbite-react";
 import React, { useContext, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import "../../../src/index.css";
+// import "../../../src/index.css";
 import { AuthContext } from "../../provider/AuthProvider";
 import { updateProfile } from "firebase/auth";
-import { toast } from "react-hot-toast";
-import { Toaster } from "react-hot-toast";
+
 
 const Register = () => {
   const [error, setError] = useState("");
@@ -36,19 +35,16 @@ const Register = () => {
     createUser(email, password)
       .then((result) => {
         const registerUser = result.user;
-        console.log(registerUser);
+        // console.log(registerUser);
         navigate("/");
-        toast.success("Successfully profile updated");
-        // setRegSuccess("Registration successfull");
+        setRegSuccess("Registration successfull");
         setError("");
         if (registerUser) {
           updateProfile(registerUser, {
             displayName: name,
             photoURL: photoUrl,
           })
-            .then(() => {
-              toast.success("Successfully profile updated");
-            })
+            .then(() => {})
             .catch((error) => {
               console.error(error.message);
             });
@@ -142,9 +138,8 @@ const Register = () => {
             </Link>
           </p>
         </div>
-        {/* <p className="text-yellow-600">{regSuccess}</p> */}
+        <p className="text-yellow-600">{regSuccess}</p>
       </form>
-      <Toaster />;
     </div>
   );
 };
