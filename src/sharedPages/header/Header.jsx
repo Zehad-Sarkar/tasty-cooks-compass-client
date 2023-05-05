@@ -48,15 +48,22 @@ const Header = () => {
             <>
               <img
                 className="w-8 h-8 rounded-full"
-                src={user?.photoUrl? user.photoUrl:""}
-                alt="user photo"
-                title={user?.displayName? user.displayName:""}
+                src={user.photoURL}
+                // src={user ? user : user.photoUrl}
+                title={
+                  user?.displayName ? user.displayName : "name unavailable"
+                }
               />
             </>
           ) : (
-            <Link to="/login">
-              <Button className="btn">Login</Button>
-            </Link>
+            <span className="flex gap-4">
+              <Link to="/login">
+                <p className="">Login</p>
+              </Link>
+              <Link to="/register">
+                <p className="">Register</p>
+              </Link>
+            </span>
           )}
         </div>
       </div>

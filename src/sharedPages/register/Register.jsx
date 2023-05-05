@@ -4,7 +4,8 @@ import { Link, useNavigate } from "react-router-dom";
 import "../../../src/index.css";
 import { AuthContext } from "../../provider/AuthProvider";
 import { updateProfile } from "firebase/auth";
-import { Toaster, toast } from "react-hot-toast";
+import { toast } from "react-hot-toast";
+import { Toaster } from "react-hot-toast";
 
 const Register = () => {
   const [error, setError] = useState("");
@@ -28,7 +29,7 @@ const Register = () => {
       return;
     }
     if (password.length < 6) {
-      setPasswordError("password cannot be under 6 charecter");
+      setPasswordError("password cannot be less then 6 charecter");
       return;
     }
 
@@ -37,13 +38,13 @@ const Register = () => {
         const registerUser = result.user;
         console.log(registerUser);
         navigate("/");
-        setRegSuccess("Registration successfull");
+        toast.success("Successfully profile updated");
+        // setRegSuccess("Registration successfull");
         setError("");
         if (registerUser) {
           updateProfile(registerUser, {
             displayName: name,
             photoURL: photoUrl,
-            // photoURL: "https://r-a-zehad-sarkar.imgbb.com/",
           })
             .then(() => {
               toast.success("Successfully profile updated");
@@ -89,7 +90,7 @@ const Register = () => {
               Photo Url
             </label>
             <input
-              type="URL"
+              type="url"
               name="photoUrl"
               id="photourl"
               className="w-60 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5  dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
@@ -141,7 +142,7 @@ const Register = () => {
             </Link>
           </p>
         </div>
-        <p className="text-yellow-600">{regSuccess}</p>
+        {/* <p className="text-yellow-600">{regSuccess}</p> */}
       </form>
       <Toaster />;
     </div>
