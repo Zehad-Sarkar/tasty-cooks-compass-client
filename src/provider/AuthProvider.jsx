@@ -5,11 +5,11 @@ import app from "../firebase/firebase.config";
 
 const auth = getAuth(app);
 
-export const AuthContext = createContext(null);
+export const AuthContext = createContext();
 
 const AuthProvider = ({ children }) => {
 
-  const [user, setUser] = useState(null);
+  const [user, setUser] = useState();
   const [loading, setLoading] = useState(true);
 
   // create user handler
@@ -45,8 +45,8 @@ const AuthProvider = ({ children }) => {
   // observer
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, currentUser => {
-      setUser(currentUser)
       setLoading(false);
+      setUser(currentUser);
     })
     return ()=> {
       return unsubscribe()

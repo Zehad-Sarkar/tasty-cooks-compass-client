@@ -47,12 +47,9 @@ const Header = () => {
           {user ? (
             <>
               <img
-                className="w-8 h-8 rounded-full"
-                src={user.photoURL}
-                // src={user ? user : user.photoUrl}
-                title={
-                  user?.displayName ? user.displayName : "name unavailable"
-                }
+                className="w-8 h-8 rounded-full fb-tooltip fb-tooltip-bg-blue-500"
+                src={user?.photoURL}
+                title={user?.displayName}
               />
             </>
           ) : (
